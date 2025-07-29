@@ -4,12 +4,13 @@ defmodule Proj.MixProject do
   @app :proj
   @version "0.1.0"
   @all_targets [
-:qemu
+    :qemu
   ]
 
   def project do
     [
       app: @app,
+      name: "virt",
       version: @version,
       elixir: "~> 1.18",
       archives: [nerves_bootstrap: "~> 1.13"],
@@ -31,6 +32,9 @@ defmodule Proj.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:alarmist, "~> 0.3"},
+      {:nerves_hub_link, "~> 2.0"},
+      {:igniter, "~> 0.6", only: [:dev, :test]},
       # Dependencies for all targets
       {:nerves, "~> 1.10", runtime: false},
       {:shoehorn, "~> 0.9.1"},
@@ -49,7 +53,8 @@ defmodule Proj.MixProject do
       # bumps to Nerves systems. Since these include Linux kernel and Erlang
       # version updates, please review their release notes in case
       # changes to your application are needed.
-      {:nerves_system_qemu_aarch64, path: "../nerves_system_qemu_aarch64", runtime: false, targets: :qemu},
+      {:nerves_system_qemu_aarch64,
+       path: "../nerves_system_qemu_aarch64", runtime: false, targets: :qemu}
     ]
   end
 

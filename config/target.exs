@@ -86,6 +86,13 @@ config :mdns_lite,
     }
   ]
 
+config :nerves_hub_link,
+  host: "devices.nervescloud.com",
+  shared_secret: [
+    product_key: System.fetch_env!("NH_KEY"),
+    product_secret: System.fetch_env!("NH_SECRET"),
+  ]
+
 # Import target specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 # Uncomment to use target specific configurations
