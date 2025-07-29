@@ -48,13 +48,11 @@ config :nerves_ssh,
 config :vintage_net,
   regulatory_domain: "00",
   config: [
-    {"usb0", %{type: VintageNetDirect}},
     {"eth0",
      %{
        type: VintageNetEthernet,
        ipv4: %{method: :dhcp}
      }},
-    {"wlan0", %{type: VintageNetWiFi}}
   ]
 
 config :mdns_lite,
