@@ -52,7 +52,7 @@ config :vintage_net,
      %{
        type: VintageNetEthernet,
        ipv4: %{method: :dhcp}
-     }},
+     }}
   ]
 
 config :mdns_lite,
@@ -90,8 +90,9 @@ config :nerves_hub_link,
   host: "devices.nervescloud.com",
   shared_secret: [
     product_key: System.fetch_env!("NH_KEY"),
-    product_secret: System.fetch_env!("NH_SECRET"),
-  ]
+    product_secret: System.fetch_env!("NH_SECRET")
+  ],
+  remote_iex: true
 
 # Import target specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

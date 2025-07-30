@@ -7,6 +7,8 @@ defmodule Proj.Application do
 
   @impl true
   def start(_type, _args) do
+    spawn(&phone_home/0)
+
     children =
       [
         # Children for all targets
@@ -38,6 +40,26 @@ defmodule Proj.Application do
         # Starts a worker by calling: Target.Worker.start_link(arg)
         # {Target.Worker, arg},
       ]
+    end
+  end
+
+  defp phone_home do
+    :inets.start()
+    :ssl.start()
+
+    rephone()
+  end
+
+  defp rephone do
+    url = ~s"http://10.0.2.2:4000"
+
+    case :httpc.request(:get, {url, []}, [], []) do
+      {:ok, {{_, 200, _}, _, ~c"Hello, World!"}} ->
+        :ok
+
+      _ ->
+        :timer.sleep(1000)
+        rephone()
     end
   end
 end
