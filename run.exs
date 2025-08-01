@@ -41,10 +41,10 @@ defmodule Emu do
           macaddr,
           "qemu-system-aarch64",
           [
-            "-machine", "virt,virtualization=on",
-            "-cpu", "cortex-a53",
+            "-machine", "virt,accel=kvm",
+            "-cpu", "host",
             "-smp", "1",
-            "-m", "256M",
+            "-m", "200M",
             "-kernel", "../picoboot/picoboot.elf",
             "-netdev", "user,id=eth0",
             "-device", "virtio-net-device,netdev=eth0,mac=#{macaddr}",
@@ -52,17 +52,19 @@ defmodule Emu do
             "-drive", "if=none,file=#{disk_image},format=raw,id=vdisk",
             "-device", "virtio-blk-device,drive=vdisk,bus=virtio-mmio-bus.0",
             "-nographic"
-          ]
+          ],
+          #[logger_fun: &IO.puts/1]
+          []
         ]
       }
     }
   end
 
-  def start_link(id, command, args) do
+  def start_link(id, command, args, opts) do
     IO.puts("Starting #{id}")
     arg_string = Enum.join(args, " ")
     IO.puts("#{command} #{arg_string}")
-    MuonTrap.Daemon.start_link(command, args)
+    MuonTrap.Daemon.start_link(command, args, opts)
   end
 end
 
@@ -113,9 +115,13 @@ dir = System.get_env("DISK_DIR", "disks")
 File.mkdir_p!(dir)
 
 limit = 100_000
-count = 1000
-chunk = 100
-delay = 20
+count = System.get_env("COUNT", "2000") |> Integer.parse() |> elem(0)
+chunk = System.get_env("CHUNK", "100") |> Integer.parse() |> elem(0)
+delay = System.get_env("DELAY", "10") |> Integer.parse() |> elem(0)
+
+IO.puts("Count: #{count}")
+IO.puts("Chunk: #{chunk}")
+IO.puts("Delay: #{delay}")
 
 #children =
   1..limit
