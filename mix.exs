@@ -2,7 +2,7 @@ defmodule Proj.MixProject do
   use Mix.Project
 
   @app :proj
-  @version "0.1.2"
+  @version "0.1.5"
   @all_targets [
     :qemu
   ]

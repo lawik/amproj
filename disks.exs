@@ -5,6 +5,7 @@ count = count |> Integer.parse() |> elem(0)
 
 source = "/space/disks/base.img"
 File.cp!("./proj.img", source)
+File.cp!(source, "/space/disks/special.img")
 
 1..count
 |> Task.async_stream(fn n ->

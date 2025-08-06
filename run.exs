@@ -44,7 +44,7 @@ defmodule Emu do
             "-machine", "virt,accel=kvm",
             "-cpu", "host",
             "-smp", "1",
-            "-m", "200M",
+            "-m", "110M",
             "-kernel", "../picoboot/picoboot.elf",
             "-netdev", "user,id=eth0",
             "-device", "virtio-net-device,netdev=eth0,mac=#{macaddr}",

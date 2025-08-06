@@ -22,7 +22,8 @@
 
 ## Load code at system startup
 ## See https://www.erlang.org/doc/system/system_principles.html#code-loading-strategy
--mode embedded
+# attempt disabling embedded mode to reduce memory usage
+#-mode embedded
 
 # Load code as per the boot script since not using archives
 # See https://www.erlang.org/doc/man/init.html#command-line-flags
@@ -33,6 +34,10 @@
 +sbwt none
 +sbwtdcpu none
 +sbwtdio none
+
++MBas aobf
++MHas aobf
++MMmcs 30
 
 ## Save the shell history between reboots
 ## See https://www.erlang.org/doc/apps/kernel/kernel_app for additional options

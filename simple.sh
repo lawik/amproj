@@ -1,10 +1,11 @@
 #!/bin/bash
 
-qemu-system-aarch64 \
+
+/root/vms/qemu-10.0.3/build/qemu-system-aarch64 \
 	-machine virt,accel=kvm \
 	-cpu host \
 	-smp 1 \
-	-m 256M \
+	-m 110M \
 	-kernel ../picoboot/picoboot.elf \
 	-netdev user,id=eth0 \
 	-device virtio-net-device,netdev=eth0,mac=de:ad:be:ef:00:01 \
