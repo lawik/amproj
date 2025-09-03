@@ -45,7 +45,7 @@ defmodule Emu do
             "-cpu", "host",
             "-smp", "1",
             "-m", "110M",
-            "-kernel", "../picoboot/picoboot.elf",
+            "-kernel", System.get_env("LOADER", "../picoboot/picoboot.elf"),
             "-netdev", "user,id=eth0",
             "-device", "virtio-net-device,netdev=eth0,mac=#{macaddr}",
             "-global", "virtio-mmio.force-legacy=false",
