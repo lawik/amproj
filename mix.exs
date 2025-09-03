@@ -53,8 +53,7 @@ defmodule Proj.MixProject do
       # bumps to Nerves systems. Since these include Linux kernel and Erlang
       # version updates, please review their release notes in case
       # changes to your application are needed.
-      {:nerves_system_qemu_aarch64,
-       path: "../nerves_system_qemu_aarch64", runtime: false, targets: :qemu}
+      {:nerves_system_qemu_aarch64, "~> 0.1", runtime: false, targets: :qemu}
     ]
   end
 

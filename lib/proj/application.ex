@@ -51,10 +51,10 @@ defmodule Proj.Application do
   end
 
   defp rephone do
-    url = ~s"http://10.0.2.2:4000"
+    url = "http://10.0.2.2:4000/api/status/#{Nerves.Runtime.serial_number()}"
 
-    case :httpc.request(:get, {url, []}, [], []) do
-      {:ok, {{_, 200, _}, _, ~c"Hello, World!"}} ->
+    case Req.post(url) do
+      {:ok, %{status: 200}} ->
         :ok
 
       _ ->
